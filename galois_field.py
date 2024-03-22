@@ -173,6 +173,31 @@ class Element:
         """
         return f"{self.value}"
 
+    def __pow__(self, exponent: int) -> 'Element':
+        """
+        Возведение элемента поля Галуа в степень.
+
+        Использует бинарное возведение в степень для эффективного вычисления.
+        Для отрицательных степеней сначала находит обратный элемент,
+        а затем применяет возведение в степень.
+
+        :param exponent: Степень, в которую возводится элемент.
+        :return: Результат возведения в степень.
+        """
+        if exponent < 0:
+            result = self.inverse()
+            exponent = -exponent
+        else:
+            result = Element(1, self.field)
+        base = self
+        while exponent > 0:
+            if exponent % 2 == 1:
+                result = result * base
+            base = base * base
+            exponent = exponent // 2
+
+        return result
+
     def inverse(self) -> 'Element':
         """
         Нахождение обратного элемента по расширенному алгоритму Евклида
