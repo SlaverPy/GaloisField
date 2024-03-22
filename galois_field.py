@@ -24,6 +24,14 @@ class GaloisField:
         self._n = n
         self._order = p ** n
 
+    def __str__(self) -> str:
+        """
+        Строковое представление поля Галуа.
+
+        :return: Значение Поля.
+        """
+        return f"GF({self.p}^{self.n})"
+
     def is_prime(self, num: int) -> bool:
         """
         Проверяет, является ли заданное число простым.
@@ -37,6 +45,8 @@ class GaloisField:
             if num % i == 0:
                 return False
         return True
+
+
 
 class Element:
     """
@@ -109,6 +119,14 @@ class Element:
         :return: True, если значения элементов различаются, иначе False.
         """
         return not self.__eq__(other)
+
+    def __str__(self) -> str:
+        """
+        Строковое представление значения элемента поля Галуа.
+
+        :return: Значение элемента.
+        """
+        return f"{self.value}"
 
     def inverse(self) -> 'Element':
         """
