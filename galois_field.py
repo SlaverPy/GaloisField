@@ -46,6 +46,51 @@ class GaloisField:
                 return False
         return True
 
+    @property
+    def p(self) -> int:
+        """
+        Возвращает характеристику поля Галуа (простое число p).
+
+        :return: Характеристика поля Галуа.
+        """
+        return self._p
+
+    @p.setter
+    def p(self, value: int):
+        """
+        Устанавливает характеристику поля Галуа (простое число p).
+
+        :param value: Новая характеристика поля Галуа.
+        """
+        self._p = value
+
+    @property
+    def n(self) -> int:
+        """
+        Возвращает степень расширения поля Галуа.
+
+        :return: Степень расширения поля Галуа.
+        """
+        return self._n
+
+    @n.setter
+    def n(self, value: int):
+        """
+        Устанавливает степень расширения поля Галуа.
+
+        :param value: Новая степень расширения поля Галуа.
+        """
+        self._n = value
+
+    @property
+    def order(self) -> int:
+        """
+        Возвращает порядок поля Галуа, который равен p^n.
+
+        :return: Порядок поля Галуа.
+        """
+        return self._order
+
 
 
 class Element:
