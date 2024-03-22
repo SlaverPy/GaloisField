@@ -38,4 +38,68 @@ class GaloisField:
                 return False
         return True
 
+class Element:
+    """
+    Класс для представления элемента поля Галуа.
 
+    :ivar field: Поле Галуа, к которому принадлежит элемент.
+    :ivar value: Значение элемента в поле.
+    """
+
+    def __init__(self, value: int, field: GaloisField):
+        """
+        Инициализирует новый экземпляр элемента поля Галуа.
+
+        :param value: Значение элемента в поле.
+        :param field: Экземпляр класса поля Галуа, к которому принадлежит элемент.
+        """
+        self.field = field
+        self.value = value % field.order
+
+    def __add__(self, other: 'Element') -> 'Element':
+        """
+        Сложение двух элементов поля Галуа.
+
+        :param other: Второй элемент для сложения.
+        :return: Новый элемент поля Галуа, результат сложения.
+        """
+        return Element((self.value + other.value) % self.field.order, self.field)
+
+    def __sub__(self, other: 'Element') -> 'Element':
+        """
+        Вычитание элементов поля Галуа.
+
+        :param other: Второй элемент для вычитания.
+        :return: Новый элемент поля Галуа, результат вычитания.
+        """
+        return Element((self.value - other.value) % self.field.order, self.field)
+
+    def __mul__(self, other: 'Element') -> 'Element':
+        """
+        Умножение элементов поля Галуа.
+
+        :param other: Второй элемент для умножения.
+        :return: Новый элемент поля Галуа, результат умножения.
+        """
+        return Element((self.value * other.value) % self.field.order, self.field)
+
+    def __truediv__(self, other: 'Element') -> 'Element':
+        """
+        Деление элементов поля Галуа.
+
+        :param other: Второй элемент для деления.
+        :return: Новый элемент поля Галуа, результат деления.
+        """
+        return Element((self.value * other.inverse().value) % self.field.order, self.field)
+
+    def inverse(self) -> 'Element':
+        """
+        Нахождение обратного элемента по расширенному алгоритму Евклида
+
+        :return: Обратный элемент поля Галуа.
+        :raises ValueError: Если обратный элемент не существует.
+        """
+        g, x, _ = self.extended_gcd(self.value, self.field.order)
+        if g != 1:
+            raise ValueError("Обратный элемент не существует")
+        return Element(x % self.field.order, self.field)
