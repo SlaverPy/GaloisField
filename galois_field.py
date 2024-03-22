@@ -92,6 +92,24 @@ class Element:
         """
         return Element((self.value * other.inverse().value) % self.field.order, self.field)
 
+    def __eq__(self, other: 'Element') -> bool:
+        """
+        Проверяет равенство двух элементов поля Галуа.
+
+        :param other: Элемент поля Галуа, с которым сравнивается текущий элемент.
+        :return: True, если значения элементов равны, иначе False.
+        """
+        return self.value == other.value
+
+    def __ne__(self, other: 'Element') -> bool:
+        """
+        Проверяет неравенство двух элементов поля Галуа.
+
+        :param other: Элемент поля Галуа, с которым сравнивается текущий элемент.
+        :return: True, если значения элементов различаются, иначе False.
+        """
+        return not self.__eq__(other)
+
     def inverse(self) -> 'Element':
         """
         Нахождение обратного элемента по расширенному алгоритму Евклида
