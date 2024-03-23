@@ -1,6 +1,6 @@
 import json
 import yaml
-from galois_field_old import GaloisField, Element
+from galois_field import GaloisField
 
 
 class FieldOperationProcessor:
