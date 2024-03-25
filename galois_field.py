@@ -32,7 +32,13 @@ class GaloisField:
         """
         return f"GF({self.p}^{self.n})"
 
-    def __call__(self, value):
+    def __call__(self, value: int) -> 'Element':
+        """
+        Метод для создания Елемента поля.
+
+        :param value: Значения поля
+        :return: элемент в поле
+        """
         return Element(value, self)
 
     def is_prime(self, num: int) -> bool:
