@@ -195,7 +195,8 @@ class Element:
         """
         if exponent < 0:
             result = self.inverse()
-            exponent = -exponent
+            return result
+
         else:
             result = Element(1, self.field)
         base = self
@@ -218,3 +219,19 @@ class Element:
         if g != 1:
             raise ValueError("Обратный элемент не существует")
         return Element(x % self.field.order, self.field)
+
+    def extended_gcd(self, a: int, b: int) -> tuple:
+        """
+        Расширенный алгоритм Евклида для нахождения наибольшего общего делителя (НОД)
+        двух чисел a и b, а также коэффициентов x и y уравнения ax + by = gcd(a,b).
+
+        :param a: Первое число.
+        :param b: Второе число.
+        :return: Кортеж из трех элементов (gcd, x, y), где gcd - наибольший общий делитель a и b,
+                 x и y - коэффициенты, соответственно.
+        """
+        if a == 0:
+            return (b, 0, 1)
+        else:
+            gcd, x, y = self.extended_gcd(b % a, a)
+            return (gcd, y - (b // a) * x, x)

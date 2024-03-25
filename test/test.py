@@ -45,6 +45,7 @@ class TestElementGF7(unittest.TestCase):
         self.assertEqual(result.value, 3, "The inverse of 5 mod 7 should be 3")
 
     def test_equality_GF_7(self):
+
         """Тестирование сравнения равенства и неравенства элементов в GF(7)."""
         self.assertTrue(self.elem1 == self.gf(3))
         self.assertFalse(self.elem1 == self.elem2)
