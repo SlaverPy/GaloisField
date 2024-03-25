@@ -1,5 +1,5 @@
 import unittest
-from galois_field_old import GaloisField
+from galois_field import GaloisField
 
 
 class TestElementGF7(unittest.TestCase):

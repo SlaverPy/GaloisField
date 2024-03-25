@@ -32,6 +32,9 @@ class GaloisField:
         """
         return f"GF({self.p}^{self.n})"
 
+    def __call__(self, value):
+        return Element(value, self)
+
     def is_prime(self, num: int) -> bool:
         """
         Проверяет, является ли заданное число простым.
